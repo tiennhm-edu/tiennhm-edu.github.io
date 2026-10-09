@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tiennhm-edu · Học lập trình qua dự án</title>
+<meta name="description" content="Code mẫu, dự án và tài liệu giảng dạy lập trình của TienNHM: .NET Full-Stack, thuật toán, trí tuệ nhân tạo.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f5f5f5; --card: #ffffff; --ink: #2d3142; --muted: #4f5d75; --soft: #7a8399;
+  --rule: rgba(45,49,66,0.12); --accent: #eb6c36; --accent-tint: rgba(235,108,54,0.08); --link: #2e5aa8;
+  --sans: 'Geist', system-ui, sans-serif; --serif: 'Noto Serif', Georgia, serif; --mono: 'Geist Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #1f2230; --card: #282c3c; --ink: #f0f0f0; --muted: #bfc4d0; --soft: #8e98ac;
+    --rule: rgba(245,245,245,0.12); --accent: #f08a59; --accent-tint: rgba(240,138,89,0.12); --link: #8fb3ec; }
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.55; overflow-x: hidden; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+header.top { border-bottom: 1px solid var(--rule); }
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+.brand { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.08em; color: var(--ink); }
+.brand b { color: var(--accent); font-weight: 500; }
+header.top nav { display: flex; gap: 1.25rem; font-size: 0.88rem; }
+header.top nav a { color: var(--muted); }
+
+.hero { padding: 4.5rem 0 3rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.1rem, 4vw + 1rem, 3.4rem); line-height: 1.1; letter-spacing: -0.02em; max-width: 18ch; }
+.lead { color: var(--muted); font-size: 1.08rem; max-width: 60ch; margin-top: 1.1rem; }
+.cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; padding: 0.6rem 1rem; border-radius: 6px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn:hover { text-decoration: none; border-color: var(--accent); }
+
+section { padding: 3rem 0; border-top: 1px solid var(--rule); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 1.8rem; letter-spacing: -0.01em; }
+.sec-head p { color: var(--muted); max-width: 56ch; font-size: 0.95rem; }
+
+.roadmap { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--card); margin-bottom: 1.5rem; }
+.roadmap div { padding: 1rem 1.1rem; border-right: 1px solid var(--rule); }
+.roadmap div:last-child { border-right: none; background: var(--accent-tint); }
+.roadmap span { display: block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--soft); margin-bottom: 0.3rem; }
+.roadmap b { font-weight: 600; font-size: 0.92rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 1rem; }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.card.feature { border-top: 3px solid var(--accent); }
+.card .meta { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.7rem; color: var(--soft); letter-spacing: 0.04em; }
+.card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; line-height: 1.25; }
+.card h3 a { color: var(--ink); }
+.card p { color: var(--muted); font-size: 0.9rem; flex: 1; overflow-wrap: anywhere; }
+.card, .list a { min-width: 0; }
+.card .links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-size: 0.86rem; margin-top: 0.25rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tags span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0.05rem 0.4rem; }
+
+.list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.list.spaced { margin-top: 1.5rem; }
+.list a { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 1rem; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--rule); color: var(--ink); }
+.list a:hover { text-decoration: none; background: var(--accent-tint); }
+.list b { font-weight: 600; font-size: 0.95rem; overflow-wrap: anywhere; }
+.list i { font-style: normal; font-family: var(--mono); font-size: 0.7rem; color: var(--soft); align-self: center; }
+.list small { grid-column: 1 / -1; color: var(--muted); font-size: 0.84rem; }
+
+footer { border-top: 1px solid var(--rule); padding: 2rem 0 3rem; color: var(--soft); font-family: var(--mono); font-size: 0.74rem; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+
+@media (max-width: 760px) {
+  .wrap { padding: 0 16px; }
+  .roadmap { grid-template-columns: 1fr 1fr; }
+  .roadmap div { border-bottom: 1px solid var(--rule); }
+  .roadmap div:last-child { grid-column: 1 / -1; border-bottom: none; }
+  header.top nav a.hide-sm { display: none; }
+  .hero { padding: 3rem 0 2rem; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><b>tiennhm</b>-edu</a>
+    <nav>
+      <a href="#dotnet">.NET</a>
+      <a href="#ai" class="hide-sm">Thuật toán &amp; AI</a>
+      <a href="https://tiennhm.io.vn/">Blog</a>
+      <a href="https://github.com/tiennhm-edu" class="hide-sm">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero"><div class="wrap">
+    <p class="eyebrow">TienNHM · giảng dạy lập trình</p>
+    <h1>Học lập trình bằng cách làm dự án thật</h1>
+    <p class="lead">Code mẫu, dự án và bài thực hành mình dùng trên lớp. Mỗi phần kiến thức kết thúc bằng một sản phẩm chạy được,
+      và code được lưu theo từng buổi để bạn xem lại bất cứ lúc nào.</p>
+    <div class="cta">
+      <a class="btn primary" href="#dotnet">Khóa .NET Full-Stack →</a>
+      <a class="btn" href="https://github.com/tiennhm-edu">Xem trên GitHub</a>
+      <a class="btn" href="https://tiennhm.io.vn/">Blog tiennhm.io.vn</a>
+    </div>
+  </div></div>
+
+  <section id="dotnet">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>.NET Full-Stack</h2>
+        <p>Lộ trình 55 buổi: từ console app C# tới Blazor, Web API, EF Core, Clean Architecture và microservice.</p>
+      </div>
+      <div class="roadmap">
+        <div><span>BUỔI 1–13</span><b>C# &amp; OOP</b></div>
+        <div><span>BUỔI 14–22</span><b>HTML · CSS · Bootstrap</b></div>
+        <div><span>BUỔI 23–35</span><b>Blazor · Web API · SignalR</b></div>
+        <div><span>BUỔI 36–47</span><b>SQL · EF Core · Backend</b></div>
+        <div><span>BUỔI 48–55</span><b>Dự án cuối khóa</b></div>
+      </div>
+      <div class="grid">
+        <article class="card feature">
+          <div class="meta"><span>BUỔI 23 → 55</span><span>C# · Blazor</span></div>
+          <h3><a href="https://github.com/tiennhm-edu/cybercafe">CyberCafe</a></h3>
+          <p>Dự án xương sống của khóa: app đặt món quán cà phê phát triển dần qua từng buổi. Mỗi mốc là một git tag —
+            vắng buổi nào thì <code>git checkout</code> tag buổi đó.</p>
+          <div class="tags"><span>Blazor Server</span><span>EditForm</span><span>xUnit</span><span>git tag theo buổi</span></div>
+          <div class="links"><a href="https://github.com/tiennhm-edu/cybercafe">Mã nguồn</a><a href="https://github.com/tiennhm-edu/cybercafe/tags">Các mốc</a></div>
+        </article>
+        <article class="card feature">
+          <div class="meta"><span>BUỔI 14 → 22</span><span>HTML · CSS</span></div>
+          <h3><a href="https://tiennhm-edu.github.io/dotnet-web-design/">Web Design</a></h3>
+          <p>Ba website dựng trên lớp, kèm hướng dẫn từng bước: trang quán cà phê bằng HTML thuần, trang bán hàng với
+            Flexbox / Grid, và portfolio responsive bằng Bootstrap 5.</p>
+          <div class="tags"><span>HTML5</span><span>Flexbox</span><span>Grid</span><span>Bootstrap 5</span></div>
+          <div class="links">
+            <a href="https://tiennhm-edu.github.io/dotnet-web-design/P3-code-cafe/">P3 Code Cafe</a>
+            <a href="https://tiennhm-edu.github.io/dotnet-web-design/P4-layout-shop/">P4 Shop</a>
+            <a href="https://tiennhm-edu.github.io/dotnet-web-design/P5-my-portfolio/">P5 Portfolio</a>
+            <a href="https://github.com/tiennhm-edu/dotnet-web-design">Mã nguồn</a>
+          </div>
+        </article>
+      </div>
+      <div class="list spaced">
+        <a href="https://github.com/tiennhm-edu/dotnet07_webapi"><b>dotnet07_webapi</b><i>C#</i><small>Web API CRUD cơ bản của lớp DotNet07.</small></a>
+        <a href="https://github.com/tiennhm-edu/rabbitmq-demo-net8"><b>rabbitmq-demo-net8</b><i>C#</i><small>RabbitMQ với .NET 8: producer / consumer từ cơ bản tới nâng cao — nền cho phần microservice.</small></a>
+        <a href="https://github.com/tiennhm-edu/QLKTX-EntityFramework"><b>QLKTX-EntityFramework</b><i>C#</i><small>Quản lý ký túc xá với Entity Framework.</small></a>
+        <a href="https://github.com/tiennhm-edu/CoffeeManagement"><b>CoffeeManagement</b><i>C#</i><small>Quản lý quán cà phê theo mô hình 3 lớp (GUI / BUS / DAO / DTO).</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Thuật toán &amp; Trí tuệ nhân tạo</h2>
+        <p>Cài đặt các thuật toán tìm kiếm, tối ưu và học máy kèm giải thích.</p>
+      </div>
+      <div class="list">
+        <a href="https://github.com/tiennhm-edu/Algorithms"><b>Algorithms</b><i>C++</i><small>Tổng hợp chi tiết các thuật toán lập trình.</small></a>
+        <a href="https://github.com/tiennhm-edu/Artificial-Intelligence-Course"><b>Artificial-Intelligence-Course</b><i>Python</i><small>Bài thực hành môn Trí tuệ nhân tạo.</small></a>
+        <a href="https://github.com/tiennhm-edu/N-Queens-Simulated-Annealing"><b>N-Queens-Simulated-Annealing</b><i>Python</i><small>Giải bài toán N quân hậu bằng Simulated Annealing.</small></a>
+        <a href="https://github.com/tiennhm-edu/Maze-Astar"><b>Maze-Astar</b><i>Python</i><small>Tìm đường trong mê cung bằng A*.</small></a>
+        <a href="https://github.com/tiennhm-edu/CRNN-OCR"><b>CRNN-OCR</b><i>Python</i><small>OCR với CRNN (CNN + BiLSTM) và CTC loss.</small></a>
+        <a href="https://github.com/tiennhm-edu/OCR"><b>OCR</b><i>Python</i><small>Nhận dạng ký tự quang học.</small></a>
+        <a href="https://github.com/tiennhm-edu/CartPole-CrossEntropyMethod"><b>CartPole-CrossEntropyMethod</b><i>Notebook</i><small>Học tăng cường: CartPole bằng Cross-Entropy Method.</small></a>
+        <a href="https://github.com/tiennhm-edu/Practical-Introduction-to-10-Regression-Algorithm"><b>10 Regression Algorithms</b><i>Notebook</i><small>Giới thiệu thực hành 10 thuật toán hồi quy.</small></a>
+        <a href="https://github.com/tiennhm-edu/ce_custom_loss"><b>ce_custom_loss</b><i>Notebook</i><small>Thử nghiệm hàm mất mát cross-entropy tùy biến.</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="other">
+    <div class="wrap">
+      <div class="sec-head"><h2>Khác</h2></div>
+      <div class="list">
+        <a href="https://github.com/tiennhm-edu/JavaServlet-Assignments"><b>JavaServlet-Assignments</b><i>Java</i><small>Bài tập web app với Java Servlet.</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© TienNHM · tiennhm-edu</span>
+    <span><a href="https://tiennhm.io.vn/">tiennhm.io.vn</a> · <a href="https://github.com/tiennhm-edu">github.com/tiennhm-edu</a></span>
+  </div>
+</footer>
+</body>
+</html>
